@@ -44,7 +44,7 @@ You can control the device via Rest API calls or use the mobile application (com
 
 You can wire everything according to this schematic:
 
-![Schematic](./resources/schematic/Schematic_PhantocmController.svg?raw=true)
+![Schematic](./resources/schematic/Schematic_PhantomController.svg?raw=true)
 
 I also build a custom PCB, you can check out [Gerber files here](./resources/gerber/Gerber_PhantomController.zip). Or you can use the [easyEDA project from here](./resources/easyEDA/PhantomController).
 
