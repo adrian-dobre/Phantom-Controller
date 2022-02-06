@@ -27,8 +27,29 @@ Well, due to a few of reasons:
 ## What does it do?
 
 It exposes a configuration page, when booting in WiFi AP mode (similar to ESP WiFi managers), where you configure WiFi SSID, Password and an Access Key used to authenticate RestAPI calls.
+![Configuration](./resources/demo/ControllerConfig.png?raw=true)
 
 Once in WiFi Station mode, it exposes a Rest API that allows controlling the HRV and seeing HRV status and climate data. You can check out the [available APIs here](./src/components/RestApi.cpp).
+```
+curl --location --request GET 'http://<host>:<port>/phantom-controller/stats' \
+--header 'Authorization: Bearer <AccessKey>'
+
+Response:
+{
+    "climate": {
+        "light": 123,
+        "temperature": 20.84,
+        "pressure": 1010.37,
+        "humidity": 42.81,
+        "co2": 1137
+    },
+    "ventilation": {
+        "mode": 1,
+        "fanSpeed": 1,
+        "humidityLevel": 1
+    }
+}
+```
 
 You can control the device via Rest API calls or use the mobile application (coming soon)
 
