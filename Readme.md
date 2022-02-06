@@ -14,13 +14,13 @@ combined with an IR remote for NovingAir Phantom [Wireless](https://ventilatie-r
 It uses the following sensors:
 - MHZ-19C CO2 sensor
 - MAX44009 ambient light sensor
-- BME 280 temperature, humidity and pressure sensors
+- BME 280 temperature, humidity and pressure sensor
 
 
 ## Why do it?
 
-Well, due to a couple of reasons:
-1. NovingAir Phantom HRV system does not have a connected solution, just a [standard IR remote control](https://ventilatie-recuperare.ro/produs/recuperator-de-caldura-novingair-phantom-active/)
+Well, due to a few of reasons:
+1. NovingAir Phantom HRV system does not have a connected solution, just a [standard IR remote control](https://ventilatie-recuperare.ro/produs/telecomanda-tc-phantom-active/)
 2. It makes sense to combine the "controller" with a Weather Station - this can allow creating automations without having to purchase separate sensors
 3. I like controlling my devices from my phone. I used a general purpose, programable RC (Broadlink RM4 mini) for this in the past, but I didn't quite like how everything looked/worked.
 
@@ -46,6 +46,6 @@ You can wire everything according to this schematic:
 
 ![Schematic](./resources/schematic/Schematic_PhantomController.svg?raw=true)
 
-I also build a custom PCB, you can check out [Gerber files here](./resources/gerber/Gerber_PhantomController.zip). Or you can use the [easyEDA project from here](./resources/easyEDA/PhantomController).
+I also built a custom PCB, you can check out [Gerber files here](./resources/gerber/Gerber_PhantomController.zip). Or you can use the [easyEDA project from here](./resources/easyEDA/PhantomController).
 
 **IMPORTANT NOTE**: It seems that the [BME280 sensor that I used](https://www.banggood.com/CJMCU-280E-BME280-High-Precision-Atmospheric-Pressure-Sensor-Module-Board-p-1897807.html?rmmds=myorder&cur_warehouse=CN) has a different pin layout than most other sensors on the market. Make sure you use the same sensor or adjust the PCB/connections to your own sensor. In general, please check all the connections match before soldering stuff :).
