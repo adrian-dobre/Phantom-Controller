@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Phantom Controller Configuration</title>
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+
+    .page {
+        margin: 0;
+        text-align: center;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .title {
+        padding: 10px;
+        background: #3376ee;
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .configuration {
+        border: 1px solid gray;
+        border-radius: 3px;
+        display: inline-block;
+        margin: 30px auto;
+        padding: 10px;
+    }
+
+    .fields {
+        padding: 15px 0;
+        vertical-align: text-bottom;
+    }
+
+    .fields label {
+        display: flex;
+        margin: 5px;
+        justify-content: space-between;
+        line-height: 30px;
+        vertical-align: bottom;
+    }
+
+    .fields input {
+        width: 300px;
+        margin-left: 10px;
+        padding: 5px 10px;
+        border: 1px solid gray;
+        border-radius: 3px;
+    }
+
+    .actions {
+        padding: 10px 5px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .actions button {
+        color: white;
+        background: #3376ee;
+        border: 1px solid #3376ee;
+        padding: 10px 15px;
+        border-radius: 3px;
+    }
+
+    button.danger {
+        background: #ff4242;
+        border: 1px solid #ff4242;
+    }
+
+    .error,
+    .success {
+        color: white;
+        background: #ff4242;
+        padding: 10px;
+        border-radius: 3px;
+        display: none;
+        margin: 5px;
+    }
+
+    .success {
+        background: #26a613;
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="title">
+            <span>Phantom Controller Configuration</span>
+        </div>
+        <div class="configuration">
+            <div class="error"></div>
+            <div class="success">Done! Controller will now reboot...</div>
+            <div class="fields">
+                <label>
+                    <span>Network SSID</span>
+                    <input type="text" name="ssid" value="%ssid%" />
+                </label>
+                <label>
+                    <span>Network Password</span>
+                    <input type="password" name="password" value="%password%" />
+                </label>
+                <label>
+                    <span>Controller Access Key</span>
+                    <input type="password" name="access-key" value="%access-key%" />
+                </label>
+            </div>
+            <div class="actions">
+                <button onclick="reset()" class="danger">Reset</button>
+                <button onclick="reboot()">Reboot</button>
+                <button onclick="save()">Save</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function validate(fields) {
+        let valid = true;
+        fields.forEach(field => {
+            valid &= field.value.length > 0;
+        });
+        return valid;
+    }
+
+    function setError(message, show = true) {
+        const error = document.querySelector('.error');
+        error.setAttribute("style", `display:${show ? 'block' : 'none'}`);
+        error.innerHTML = message;
+    }
+
+    function clearError() {
+        setError("", false);
+    }
+
+    function toggleSuccess(show = true) {
+        document.querySelector('.success').setAttribute("style", `display:${show ? 'block' : 'none'}`);
+    }
+
+    function reboot() {
+        clearResults();
+        fetch('/phantom-controller/restart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(handleResponse)
+            .catch(error => setError(error.message))
+    }
+
+    function reset() {
+        clearResults();
+        fetch('/phantom-controller/reset', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(handleResponse)
+            .catch(error => setError(error.message))
+    }
+
+    function save() {
+        clearResults();
+        const fields = document.querySelectorAll(".fields input");
+        if (!validate(fields)) {
+            return setError("All fields are required!");
+        }
+        const data = {};
+        fields.forEach(field => {
+            data[field.name] = field.value;
+        });
+        fetch('/phantom-controller/config', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(handleResponse)
+            .catch(error => setError(error.message));
+    }
+    
+    function clearResults(){
+        clearError();
+        toggleSuccess(false);
+    }
+
+    function handleResponse(response) {
+        if (response.ok) {
+            toggleSuccess();
+        } else {
+            setError(response.statusText);
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,322 @@
+{
+  "uuid": "e85c9209311a5859c6805f740c95abdf",
+  "path": "Offline/Phantom Controller",
+  "name": "Phantom Controller",
+  "content": "",
+  "created_at": "2022-02-06 14:45:48",
+  "updated_at": "2022-02-06 14:46:19",
+  "stick": "",
+  "documents": [
+    {
+      "uuid": "8cdef14dd82f24fd7bf0a148c0360ab5",
+      "title": "Phantom Controller",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "93b52c057820443d85fe2240aa3f4913": 2,
+        "7d3645a20c164db3b1c7822065ba2ba8": 4,
+        "eec61c4e6b624bad8dad67d3d5a7a82c": 2,
+        "41482494ee7b4119a4a11221936d5c16": 1,
+        "6a982f5acd61489889c68a9250259536": 1,
+        "8c172258d97c40c5a143819d059bab91": 1,
+        "bc92593c9998444e80eed6aa7f0c2f59": 1,
+        "9953519be6af43d684718d0b7628ba2a": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "110Ω",
+          2,
+          "THROUGH HOLE RESISTOR",
+          "R1,R3",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "5dea37f748cc4a699550474c5ef00924",
+            "uuid": "7d3645a20c164db3b1c7822065ba2ba8"
+          }
+        ],
+        [
+          "36Ω",
+          2,
+          "THROUGH HOLE RESISTOR",
+          "R2,R4",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "5dea37f748cc4a699550474c5ef00924",
+            "uuid": "7d3645a20c164db3b1c7822065ba2ba8"
+          }
+        ],
+        [
+          "ESP32 DEVKIT V1 DOIT",
+          1,
+          "DOIT-ESP32-DEVKIT-V1",
+          "U1",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "4fb9dd84a4c6437882b24a374301f0d2",
+            "uuid": "bc92593c9998444e80eed6aa7f0c2f59"
+          }
+        ],
+        [
+          "MH-Z19C",
+          1,
+          "MH-Z19C_FOOTPRINT",
+          "U2",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0a9992a1b28f468bbfb7d3dfbe133eed",
+            "uuid": "8c172258d97c40c5a143819d059bab91"
+          }
+        ],
+        [
+          "MAX44009",
+          1,
+          "GY-49 4-PIN",
+          "U3",
+          {
+            "BOM_Manufacturer Part": "BMP 280 4-PIN",
+            "puuid": "264da88da212465eaa2443203584b87c",
+            "uuid": "6a982f5acd61489889c68a9250259536"
+          }
+        ],
+        [
+          "BME280",
+          1,
+          "BME280",
+          "U4",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "fac1ac9a1d2f4fdca25deca74e91e5ab",
+            "uuid": "41482494ee7b4119a4a11221936d5c16"
+          }
+        ],
+        [
+          "2n5551",
+          2,
+          "2N5551",
+          "U5,U8",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "d5e072704cef4a0b9717f35353c5dc41",
+            "uuid": "eec61c4e6b624bad8dad67d3d5a7a82c"
+          }
+        ],
+        [
+          "TSAL6100",
+          2,
+          "LED-TH_BD5.8-P2.54-FD",
+          "U6,U9",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "VISHAY",
+            "BOM_Manufacturer Part": "TSAL6100",
+            "BOM_Supplier Part": "C111836",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "3270674de653459681213848d7625a65",
+            "uuid": "93b52c057820443d85fe2240aa3f4913"
+          }
+        ],
+        [
+          "micro-usb-breakout",
+          1,
+          "MICROUSB-BREAKOUT",
+          "U10",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "c39ffb6f66914bcb952c2872b4e7cb6e",
+            "uuid": "9953519be6af43d684718d0b7628ba2a"
+          }
+        ]
+      ],
+      "updateTime": 1644151579,
+      "createTime": 1644151579,
+      "histories": [],
+      "created_at": "2022-02-06 14:46:19",
+      "updated_at": "2022-02-06 14:46:19"
+    },
+    {
+      "uuid": "d5d3458bc9f48d9be27338d3a8b0c929",
+      "puuid": "e85c9209311a5859c6805f740c95abdf",
+      "title": "Phantom Controller PCB",
+      "filename": "Phantom Controller PCB.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "5dea37f748cc4a699550474c5ef00924": 4,
+        "4fb9dd84a4c6437882b24a374301f0d2": 1,
+        "0a9992a1b28f468bbfb7d3dfbe133eed": 1,
+        "264da88da212465eaa2443203584b87c": 1,
+        "fac1ac9a1d2f4fdca25deca74e91e5ab": 1,
+        "d5e072704cef4a0b9717f35353c5dc41": 2,
+        "3270674de653459681213848d7625a65": 2,
+        "c39ffb6f66914bcb952c2872b4e7cb6e": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "110Ω",
+          2,
+          "THROUGH HOLE RESISTOR",
+          "R1,R3",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "5dea37f748cc4a699550474c5ef00924",
+            "uuid": "7d3645a20c164db3b1c7822065ba2ba8"
+          }
+        ],
+        [
+          "36Ω",
+          2,
+          "THROUGH HOLE RESISTOR",
+          "R2,R4",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "5dea37f748cc4a699550474c5ef00924",
+            "uuid": "7d3645a20c164db3b1c7822065ba2ba8"
+          }
+        ],
+        [
+          "ESP32 DEVKIT V1 DOIT",
+          1,
+          "DOIT-ESP32-DEVKIT-V1",
+          "U1",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "4fb9dd84a4c6437882b24a374301f0d2",
+            "uuid": "bc92593c9998444e80eed6aa7f0c2f59"
+          }
+        ],
+        [
+          "MH-Z19C",
+          1,
+          "MH-Z19C_FOOTPRINT",
+          "U2",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "0a9992a1b28f468bbfb7d3dfbe133eed",
+            "uuid": "8c172258d97c40c5a143819d059bab91"
+          }
+        ],
+        [
+          "MAX44009",
+          1,
+          "GY-49 4-PIN",
+          "U3",
+          {
+            "BOM_Manufacturer Part": "BMP 280 4-PIN",
+            "puuid": "264da88da212465eaa2443203584b87c",
+            "uuid": "6a982f5acd61489889c68a9250259536"
+          }
+        ],
+        [
+          "BME280",
+          1,
+          "BME280",
+          "U4",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "fac1ac9a1d2f4fdca25deca74e91e5ab",
+            "uuid": "41482494ee7b4119a4a11221936d5c16"
+          }
+        ],
+        [
+          "2n5551",
+          2,
+          "2N5551",
+          "U5,U8",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "d5e072704cef4a0b9717f35353c5dc41",
+            "uuid": "eec61c4e6b624bad8dad67d3d5a7a82c"
+          }
+        ],
+        [
+          "TSAL6100",
+          2,
+          "LED-TH_BD5.8-P2.54-FD",
+          "U6,U9",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "VISHAY",
+            "BOM_Manufacturer Part": "TSAL6100",
+            "BOM_Supplier Part": "C111836",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "3270674de653459681213848d7625a65",
+            "uuid": "93b52c057820443d85fe2240aa3f4913"
+          }
+        ],
+        [
+          "micro-usb-breakout",
+          1,
+          "MICROUSB-BREAKOUT",
+          "U10",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "c39ffb6f66914bcb952c2872b4e7cb6e",
+            "uuid": "9953519be6af43d684718d0b7628ba2a"
+          }
+        ]
+      ],
+      "updateTime": 1644151548,
+      "createTime": 1644151548,
+      "histories": [],
+      "created_at": "2022-02-06 14:45:48",
+      "updated_at": "2022-02-06 14:45:48"
+    }
+  ],
+  "sort": [
+    "8cdef14dd82f24fd7bf0a148c0360ab5"
+  ],
+  "title": "Phantom Controller",
+  "foldername": "Phantom Controller",
+  "schfilename": "Phantom Controller.json",
+  "schfilemtime": 1644151579145
+}
