@@ -10,6 +10,14 @@ This is an ESP32 based Weather Station that can measure:
 - temperature
 
 combined with an IR remote for NovingAir Phantom [Wireless](https://ventilatie-recuperare.ro/produs/recuperator-de-caldura-novingair-phantom-wireless) or [Active](https://ventilatie-recuperare.ro/produs/recuperator-de-caldura-novingair-phantom-active/) Heat-Recovery Ventilation system.
+*Note*: The HRV system is sold under many different names/brands, but it seems to be exactly the same product, so this should work with all these brands, here are
+a few of them:
+- [Ambientika wireless+](https://www.ambientika.eu/en/ambientika-wireless/4893273177380)
+- [KLIMAIR UNOKLIMA 160 XT](https://www.xl-byg.dk/shop/klimair-unoklima-160-xt-varmegenvinding-160-mm-2175373)
+- [AEI Ductless Heat Recovery Ventilation](https://www.aei.ie/heat-recovery-ventilation/heat-ventilator-system/)
+- [Sudwind Advanced+](https://plumbavent.com/products/copy-of-sudwind-advanced-160)
+- [OERRE GHOST](https://www.oerre.eu/prodotti/3-vmc/1010-ghost-recuperatore-di-calore-decentralizzato-a-flusso-alternato/312-ghost-recuperatore-di-calore-decentralizzato--a-flusso-alternato.html)
+
 
 It uses the following sensors:
 - MHZ-19C CO2 sensor
