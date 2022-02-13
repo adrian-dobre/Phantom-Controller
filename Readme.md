@@ -18,6 +18,8 @@ a few of them:
 - [Sudwind Advanced+](https://plumbavent.com/products/copy-of-sudwind-advanced-160)
 - [OERRE GHOST](https://www.oerre.eu/prodotti/3-vmc/1010-ghost-recuperatore-di-calore-decentralizzato-a-flusso-alternato/312-ghost-recuperatore-di-calore-decentralizzato--a-flusso-alternato.html)
 
+![NovingAir Phantom](./resources/demo/phantom.jpeg?raw=true)
+
 
 It uses the following sensors:
 - MHZ-19C CO2 sensor
