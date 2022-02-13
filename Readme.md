@@ -6,7 +6,7 @@ This is an ESP32 based Weather Station that can measure:
 - CO2 levels (ppm)
 - atmospheric pressure (bar)
 - ambient light (lux)
-- relative humodity
+- relative humidity
 - temperature
 
 combined with an IR remote for NovingAir Phantom [Wireless](https://ventilatie-recuperare.ro/produs/recuperator-de-caldura-novingair-phantom-wireless) or [Active](https://ventilatie-recuperare.ro/produs/recuperator-de-caldura-novingair-phantom-active/) Heat-Recovery Ventilation system.
@@ -22,7 +22,7 @@ It uses the following sensors:
 Well, due to a few of reasons:
 1. NovingAir Phantom HRV system does not have a connected solution, just a [standard IR remote control](https://ventilatie-recuperare.ro/produs/telecomanda-tc-phantom-active/)
 2. It makes sense to combine the "controller" with a Weather Station - this can allow creating automations without having to purchase separate sensors
-3. I like controlling my devices from my phone. I used a general purpose, programable RC (Broadlink RM4 mini) for this in the past, but I didn't quite like how everything looked/worked.
+3. I like controlling my devices from my phone. I used a general purpose, programmable RC (Broadlink RM4 mini) for this in the past, but I didn't quite like how everything looked/worked.
 
 ## What does it do?
 
@@ -51,7 +51,7 @@ Response:
 }
 ```
 
-You can control the device via Rest API calls or use the mobile application (coming soon)
+You can control the device via Rest API calls or use [the mobile application](https://github.com/adrian-dobre/Phantom-Controller-Mobile)
 ![App Demo](./resources/demo/app-demo.gif?raw=true)
 
 ## What parts do I need?
