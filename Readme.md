@@ -52,6 +52,7 @@ Response:
 ```
 
 You can control the device via Rest API calls or use [the mobile application](https://github.com/adrian-dobre/Phantom-Controller-Mobile)
+
 ![App Demo](./resources/demo/app-demo.gif?raw=true)
 
 ## What parts do I need?
