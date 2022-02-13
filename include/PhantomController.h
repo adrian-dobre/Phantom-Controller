@@ -4,9 +4,6 @@
 
 class PhantomController {
    private:
-    static int address;
-    static int filterReset;
-    static int commandRepeats;
     static void sendCommand(int command);
     static void setupCodeMaps();
     static std::map<FanSpeed, int> fanSpeedCommandCodes;
@@ -14,6 +11,9 @@ class PhantomController {
     static std::map<VentilationMode, int> ventilationModeCommandCodes;
 
    public:
+    static int address;
+    static int filterReset;
+    static int commandRepeats;
     static FanSpeed fanSpeed;
     static HumidityLevel humidityLevel;
     static VentilationMode ventilationMode;

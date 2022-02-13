@@ -87,9 +87,9 @@ void DeviceConfiguration::savePhantomVentilationMode(
     preferences.end();
 }
 
-void DeviceConfiguration::reset(){
+void DeviceConfiguration::reset() {
     const char* namespaces[] = {"phantom-state", "network-config", "device"};
-    for(int i = 0; i<= 2; i++) {
+    for (int i = 0; i <= 2; i++) {
         preferences.begin(namespaces[i]);
         preferences.clear();
         preferences.end();

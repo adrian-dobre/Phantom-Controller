@@ -1,6 +1,7 @@
 #include "PhantomController.h"
 
 #include <IRremote.hpp>
+#include <queue>
 
 int PhantomController::address = 0x69;
 int PhantomController::filterReset = 0x40;
@@ -49,6 +50,45 @@ void PhantomController::setupCodeMaps() {
     }
 }
 
+std::queue<int> commandsQueue = std::queue<int>();
+unsigned long int tempEvacStartTime = 0;
+VentilationMode beforeTempEvacMode = VentilationMode::mode_automatic;
+
+void resetTempEvacIfTimedOut() {
+    if (PhantomController::ventilationMode ==
+            VentilationMode::mode_temporaryEvacuation &&
+        millis() - tempEvacStartTime > 1200000) {
+        PhantomController::ventilationMode = beforeTempEvacMode;
+    }
+}
+
+void setupTempEvac() {
+    if (PhantomController::ventilationMode !=
+        VentilationMode::mode_temporaryEvacuation) {
+        beforeTempEvacMode = PhantomController::ventilationMode;
+    }
+    tempEvacStartTime = millis();
+}
+
+void asyncCommandProcessor(void *arg) {
+    while (true) {
+        resetTempEvacIfTimedOut();
+        if (!commandsQueue.empty()) {
+            int commandToSend = commandsQueue.front();
+            commandsQueue.pop();
+            // increase the likelyhood the HRV receives the command
+            int repeatSend = 2;
+            while (repeatSend > 0) {
+                IrSender.sendNEC(PhantomController::address, commandToSend,
+                                 PhantomController::commandRepeats);
+                repeatSend--;
+                vTaskDelay(500);
+            }
+        }
+        vTaskDelay(500);
+    }
+}
+
 void PhantomController::init() {
     setupCodeMaps();
     DeviceConfiguration::init();
@@ -59,10 +99,12 @@ void PhantomController::init() {
     ventilationMode = phantomConfiguration.ventilationMode;
     IrSender.begin(4, true);
     IrSender.enableIROut(38);
+    xTaskCreate(asyncCommandProcessor, "Async Command Processor", 1024, NULL, 1,
+                NULL);
 }
 
 void PhantomController::sendCommand(int command) {
-    IrSender.sendNEC(address, command, commandRepeats);
+    commandsQueue.push(command);
 }
 
 bool PhantomController::changeFanSpeed(FanSpeed fanSpeed) {
@@ -90,6 +132,9 @@ bool PhantomController::changeHumidityLevel(HumidityLevel humidityLevel) {
 bool PhantomController::changeVentilationMode(VentilationMode ventilationMode) {
     int commandCode = ventilationModeCommandCodes[ventilationMode];
     if (commandCode != 0) {
+        if (ventilationMode == VentilationMode::mode_temporaryEvacuation) {
+            setupTempEvac();
+        }
         DeviceConfiguration::savePhantomVentilationMode(ventilationMode);
         PhantomController::ventilationMode = ventilationMode;
         sendCommand(commandCode);
