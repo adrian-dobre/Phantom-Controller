@@ -6,10 +6,20 @@ This is an ESP32 based Weather Station that can measure:
 - CO2 levels (ppm)
 - atmospheric pressure (bar)
 - ambient light (lux)
-- relative humodity
+- relative humidity
 - temperature
 
 combined with an IR remote for NovingAir Phantom [Wireless](https://ventilatie-recuperare.ro/produs/recuperator-de-caldura-novingair-phantom-wireless) or [Active](https://ventilatie-recuperare.ro/produs/recuperator-de-caldura-novingair-phantom-active/) Heat-Recovery Ventilation system.
+*Note*: The HRV system is sold under many different names/brands, but it seems to be exactly the same product, so this should work with all these brands, here are
+a few of them:
+- [Ambientika wireless+](https://www.ambientika.eu/en/ambientika-wireless/4893273177380)
+- [KLIMAIR UNOKLIMA 160 XT](https://www.xl-byg.dk/shop/klimair-unoklima-160-xt-varmegenvinding-160-mm-2175373)
+- [AEI Ductless Heat Recovery Ventilation](https://www.aei.ie/heat-recovery-ventilation/heat-ventilator-system/)
+- [Sudwind Advanced+](https://plumbavent.com/products/copy-of-sudwind-advanced-160)
+- [OERRE GHOST](https://www.oerre.eu/prodotti/3-vmc/1010-ghost-recuperatore-di-calore-decentralizzato-a-flusso-alternato/312-ghost-recuperatore-di-calore-decentralizzato--a-flusso-alternato.html)
+
+![NovingAir Phantom](./resources/demo/phantom.jpg?raw=true)
+
 
 It uses the following sensors:
 - MHZ-19C CO2 sensor
@@ -22,7 +32,7 @@ It uses the following sensors:
 Well, due to a few of reasons:
 1. NovingAir Phantom HRV system does not have a connected solution, just a [standard IR remote control](https://ventilatie-recuperare.ro/produs/telecomanda-tc-phantom-active/)
 2. It makes sense to combine the "controller" with a Weather Station - this can allow creating automations without having to purchase separate sensors
-3. I like controlling my devices from my phone. I used a general purpose, programable RC (Broadlink RM4 mini) for this in the past, but I didn't quite like how everything looked/worked.
+3. I like controlling my devices from my phone. I used a general purpose, programmable RC (Broadlink RM4 mini) for this in the past, but I didn't quite like how everything looked/worked.
 
 ## What does it do?
 
@@ -51,7 +61,8 @@ Response:
 }
 ```
 
-You can control the device via Rest API calls or use the mobile application (coming soon)
+You can control the device via Rest API calls or use [the mobile application](https://github.com/adrian-dobre/Phantom-Controller-Mobile)
+
 ![App Demo](./resources/demo/app-demo.gif?raw=true)
 
 ## What parts do I need?
