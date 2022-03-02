@@ -9,12 +9,13 @@ void NetworkConnection::init() {
     WiFiConfiguration configuration =
         DeviceConfiguration::getWiFiConfiguration();
 
-    if (!configuration.ssid.isEmpty() && !configuration.password.isEmpty() &&
-        !configuration.password.isEmpty() &&
+    bool hasCredentials = !configuration.ssid.isEmpty() && !configuration.password.isEmpty() &&
+        !configuration.password.isEmpty();
+    if (hasCredentials &&
         !DeviceConfiguration::doubleResetDetected) {
         startStation(configuration.ssid, configuration.password);
     } else {
-        startAP();
+        startAP(hasCredentials);
     }
 }
 

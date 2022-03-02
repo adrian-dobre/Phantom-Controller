@@ -5,7 +5,7 @@
 
 int PhantomController::address = 0x69;
 int PhantomController::filterReset = 0x40;
-int PhantomController::commandRepeats = 2;
+int PhantomController::commandRepeats = 0;
 
 FanSpeed PhantomController::fanSpeed = FanSpeed::fan_low;
 HumidityLevel PhantomController::humidityLevel = HumidityLevel::humidity_low;
@@ -77,12 +77,12 @@ void asyncCommandProcessor(void *arg) {
             int commandToSend = commandsQueue.front();
             commandsQueue.pop();
             // increase the likelyhood the HRV receives the command
-            int repeatSend = 2;
+            int repeatSend = 4;
             while (repeatSend > 0) {
                 IrSender.sendNEC(PhantomController::address, commandToSend,
                                  PhantomController::commandRepeats);
                 repeatSend--;
-                vTaskDelay(500);
+                vTaskDelay(125);
             }
         }
         vTaskDelay(500);
@@ -99,7 +99,7 @@ void PhantomController::init() {
     ventilationMode = phantomConfiguration.ventilationMode;
     IrSender.begin(4, true);
     IrSender.enableIROut(38);
-    xTaskCreate(asyncCommandProcessor, "Async Command Processor", 1024, NULL, 1,
+    xTaskCreate(asyncCommandProcessor, "Async Command Processor", 1024, NULL, 2,
                 NULL);
 }
 
