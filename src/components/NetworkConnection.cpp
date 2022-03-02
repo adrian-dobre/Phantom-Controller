@@ -10,7 +10,7 @@ void NetworkConnection::init() {
         DeviceConfiguration::getWiFiConfiguration();
 
     bool hasCredentials = !configuration.ssid.isEmpty() && !configuration.password.isEmpty() &&
-        !configuration.password.isEmpty();
+        !configuration.accessKey.isEmpty();
     if (hasCredentials &&
         !DeviceConfiguration::doubleResetDetected) {
         startStation(configuration.ssid, configuration.password);
