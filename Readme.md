@@ -18,7 +18,7 @@ a few of them:
 - [Sudwind Advanced+](https://plumbavent.com/products/copy-of-sudwind-advanced-160)
 - [OERRE GHOST](https://www.oerre.eu/prodotti/3-vmc/1010-ghost-recuperatore-di-calore-decentralizzato-a-flusso-alternato/312-ghost-recuperatore-di-calore-decentralizzato--a-flusso-alternato.html)
 
-![NovingAir Phantom](./resources/demo/phantom.jpg?raw=true)
+![NovingAirw Phantom](./resources/demo/phantom.jpg?raw=true)
 
 
 It uses the following sensors:
@@ -26,7 +26,9 @@ It uses the following sensors:
 - MAX44009 ambient light sensor
 - BME 280 temperature, humidity and pressure sensor
 
-
+![PCB1](./resources/demo/IMG_9119.jpeg?raw=true)
+![PCB2](./resources/demo/IMG_0430.jpeg?raw=true)
+![PCB3](./resources/demo/IMG_0462.jpeg?raw=true)
 ## Why do it?
 
 Well, due to a few of reasons:
