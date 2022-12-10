@@ -9,10 +9,10 @@ void NetworkConnection::init() {
     WiFiConfiguration configuration =
         DeviceConfiguration::getWiFiConfiguration();
 
-    bool hasCredentials = !configuration.ssid.isEmpty() && !configuration.password.isEmpty() &&
-        !configuration.accessKey.isEmpty();
-    if (hasCredentials &&
-        !DeviceConfiguration::doubleResetDetected) {
+    bool hasCredentials = !configuration.ssid.isEmpty() &&
+                          !configuration.password.isEmpty() &&
+                          !configuration.accessKey.isEmpty();
+    if (hasCredentials && !DeviceConfiguration::doubleResetDetected) {
         startStation(configuration.ssid, configuration.password);
     } else {
         startAP(hasCredentials);
@@ -47,6 +47,8 @@ void NetworkConnection::startStation(String ssid, String password) {
     Serial.print("Starting in station mode.");
     int stationTimeout = millis() + 60000;
     WiFi.mode(WIFI_STA);
+    WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE, INADDR_NONE);
+    WiFi.setHostname("Phantom Controller");
     WiFi.begin(ssid.c_str(), password.c_str());
 
     while (WiFi.status() != WL_CONNECTED && millis() < stationTimeout) {

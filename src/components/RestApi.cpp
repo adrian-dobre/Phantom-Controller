@@ -4,6 +4,7 @@
 #include "Co2Sensor.h"
 #include "DeviceConfiguration.h"
 #include "LightSensor.h"
+#include "LivoloController.h"
 #include "PhantomController.h"
 #include "WebServer.h"
 
@@ -14,6 +15,7 @@ void RestApi::init(bool apMode) {
     Co2Sensor::init();
     LightSensor::init();
     PhantomController::init();
+    LivoloController::init();
     WebServer::init(80);
     WiFiConfiguration wiFiConfiguration =
         DeviceConfiguration::getWiFiConfiguration();
@@ -121,24 +123,37 @@ void RestApi::init(bool apMode) {
                 WebServer::badRequest(request);
             });
 
-        WebServer::on("/phantom-controller/ventilation/humidity-level",
-                      HTTP_PUT,
-                      [](AsyncWebServerRequest *request, JsonVariant &json) {
-                          if (!json.isNull()) {
-                              int humidityLevel = json["humidityLevel"];
-                              if (humidityLevel != 0 &&
-                                  PhantomController::changeHumidityLevel(
-                                      (HumidityLevel)humidityLevel)) {
-                                  return WebServer::OK(request);
-                              }
-                          }
-                          WebServer::badRequest(request);
-                      });
+        WebServer::onAuthorized(
+            "/phantom-controller/ventilation/humidity-level", HTTP_PUT,
+            [](AsyncWebServerRequest *request, JsonVariant &json) {
+                if (!json.isNull()) {
+                    int humidityLevel = json["humidityLevel"];
+                    if (humidityLevel != 0 &&
+                        PhantomController::changeHumidityLevel(
+                            (HumidityLevel)humidityLevel)) {
+                        return WebServer::OK(request);
+                    }
+                }
+                WebServer::badRequest(request);
+            });
 
         WebServer::onAuthorized("/phantom-controller/ventilation/filter-reset",
                                 HTTP_POST, [](AsyncWebServerRequest *request) {
                                     PhantomController::resetFilter();
                                     WebServer::OK(request);
                                 });
+                                
+        WebServer::onAuthorized(
+            "/phantom-controller/livolo/send", HTTP_POST,
+            [](AsyncWebServerRequest *request, JsonVariant &json) {
+                if (!json.isNull()) {
+                    unsigned short int remoteId = json["remoteId"];
+                    byte keyCode = json["keyCode"];
+
+                    LivoloController::send(remoteId, keyCode);
+                    return WebServer::OK(request);
+                }
+                WebServer::badRequest(request);
+            });
     }
 }
