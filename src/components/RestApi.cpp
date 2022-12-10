@@ -15,7 +15,6 @@ void RestApi::init(bool apMode) {
     Co2Sensor::init();
     LightSensor::init();
     PhantomController::init();
-    LivoloController::init();
     WebServer::init(80);
     WiFiConfiguration wiFiConfiguration =
         DeviceConfiguration::getWiFiConfiguration();

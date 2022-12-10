@@ -99,7 +99,7 @@ void PhantomController::init() {
     ventilationMode = phantomConfiguration.ventilationMode;
     IrSender.begin(4, true);
     IrSender.enableIROut(38);
-    xTaskCreate(asyncCommandProcessor, "Async Command Processor", 1024, NULL, 2,
+    xTaskCreate(asyncCommandProcessor, "Async Command Processor", 2048, NULL, 2,
                 NULL);
 }
 

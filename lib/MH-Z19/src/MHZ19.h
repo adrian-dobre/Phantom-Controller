@@ -7,17 +7,14 @@
 
 #ifdef ESP32
 #include "esp32-hal-log.h"
+#define TAG_MHZ19 "MH-Z19"
 #endif
 
 #define MHZ19_ERRORS 1			// Set to 0 to disable error prints
-
-#define TEMP_ADJUST 38			// This is the value used to adjust the temeperature.
-								// Older datsheets use 40, however is likely incorrect.
+#define TEMP_ADJUST 40			// This is the value used to adjust the temeperature.
 #define TIMEOUT_PERIOD 500		// Time out period for response (ms)
-
 #define DEFAULT_RANGE 2000		// For range function (sensor works best in this range)
-
-#define MHZ19_DATA_LEN 9		// Data protocl length
+#define MHZ19_DATA_LEN 9		// Data protocol length
 
 // Command bytes -------------------------- //
 #define MHZ19_ABC_PERIOD_OFF    0x00
@@ -39,7 +36,7 @@ class MHZ19
   public:
 	/*###########################-Variables-##########################*/
 
-	/* Holds last recieved errorcode from recieveResponse() */
+	/* Holds last received errorcode from recieveResponse() */
 	byte errorCode;
 
 	/* for keeping track of the ABC run interval */
@@ -67,13 +64,13 @@ class MHZ19
 	int getCO2(bool isunLimited = true, bool force = true);
 
 	/* returns the "raw" CO2 value of unknown units */
-	int getCO2Raw(bool force = true);
+	unsigned int getCO2Raw(bool force = true);
 
 	/* returns Raw CO2 value as a % of transmittance */		//<--- needs work to understand
 	float getTransmittance(bool force = true);
 
-	/*  returns temperature using command 134 or 135 if isFloat = true */
-	float getTemperature(bool isFloat = false, bool force = true);
+	/*  returns temperature using command 133 or 134 */
+	float getTemperature(bool force = true);
 	
 	/* reads range using command 153 */
 	int getRange();
@@ -154,6 +151,7 @@ class MHZ19
 			bool filterCleared = true;				// Additional flag set by setFiler() to store which mode was selected			
 			bool printcomm = false;					// Communication print options
 			bool _isDec = true;						// Holds preferance for communication printing
+			uint8_t fw_ver = 0;                     // holds the major version of the firmware
 		} settings;
 
 		byte constructedCommand[MHZ19_DATA_LEN];	// holder for new commands which are to be sent
@@ -178,9 +176,6 @@ class MHZ19
 
 	/* generates a checksum for sending and verifying incoming data */
 	byte getCRC(byte inBytes[]);
-
-	/* Returns what appears to be an offset */ 		//<----- knowledgable people might have success using against the raw value
-	float getTemperatureOffset(bool force = true);
 
 	/* Sends commands to the sensor */
 	void write(byte toSend[]);

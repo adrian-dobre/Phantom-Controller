@@ -13,5 +13,5 @@ void readLightSensor(void *sensor) {
 void LightSensor::init() {
     Wire.begin();
     sensor.begin();
-    xTaskCreate(readLightSensor, "Read Light Sensor", 1024, &sensor, 1, NULL);
+    xTaskCreate(readLightSensor, "Read Light Sensor", 2048, &sensor, 1, NULL);
 }

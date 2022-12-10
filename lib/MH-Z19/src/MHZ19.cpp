@@ -39,6 +39,13 @@ void MHZ19::begin(Stream &serial)
         Serial.println("!ERROR: Initial communication errorCode recieved");
         #endif 
     }
+
+    /* What FW version is the sensor running? */
+    char myVersion[4];          
+    this->getVersion(myVersion);
+    
+    /* Store the major version number (assumed to be less than 10) */
+    this->storage.settings.fw_ver = myVersion[1];
 }
 
 /*########################-Set Functions-##########################*/
@@ -169,7 +176,7 @@ int MHZ19::getCO2(bool isunLimited, bool force)
     return 0;
 }
 
-int MHZ19::getCO2Raw(bool force)
+unsigned int MHZ19::getCO2Raw(bool force)
 {
     if (force == true)
         provisioning(RAWCO2);
@@ -197,34 +204,9 @@ float MHZ19::getTransmittance(bool force)
         return 0;
 }
 
-float MHZ19::getTemperature(bool isFloat, bool force)
+float MHZ19::getTemperature(bool force)
 {
-    if(isFloat)
-    {
-        static byte baseTemp = 0;
-        static bool isSet = false;
-
-        if(!isSet)
-        {
-            provisioning(CO2LIM);
-            byte buff = (this->storage.responses.CO2LIM[4] - TEMP_ADJUST);
-
-            baseTemp = buff - (byte)getTemperatureOffset(true);
-            isSet = true;
-        }
-        
-        if(force)
-            provisioning(CO2UNLIM);
-
-        if(this->errorCode == RESULT_OK || force == false)
-        {
-           float buff = baseTemp;
-           buff += getTemperatureOffset(false);
-           return buff;
-        }
-    }
-    
-    else if(!isFloat)
+    if(this->storage.settings.fw_ver < 5)
     {
         if (force == true)
             provisioning(CO2LIM);
@@ -232,26 +214,17 @@ float MHZ19::getTemperature(bool isFloat, bool force)
         if (this->errorCode == RESULT_OK || force == false)
             return (this->storage.responses.CO2LIM[4] - TEMP_ADJUST);
     }
-    
-    return -273.15;    
-}
- 
-float MHZ19::getTemperatureOffset(bool force)
-{
-     if (force == true)
-        provisioning(CO2UNLIM);
+    else
+    {    
+        if (force == true)
+            provisioning(CO2UNLIM);
 
-    if (this->errorCode == RESULT_OK || force == false)
-    {
-        /* Value appears to be for CO2 offset (useful for deriving CO2 from raw?) */
-        /* Adjustments and calculations are based on observations of temp behavour */
-        float calc = (((this->storage.responses.CO2UNLIM[2] - 8) * 1500) + ((this->storage.responses.CO2UNLIM[3] * 100) * 1 / 17));
-        calc /= 100;
-        return calc;
+        if (this->errorCode == RESULT_OK)
+            return (float)(((int)this->storage.responses.CO2UNLIM[2] << 8) | this->storage.responses.CO2UNLIM[3]) / 100;
     }
 
-    return -273.15;
-} 
+    return -273.15;    
+}
 
 int MHZ19::getRange()
 {
@@ -654,7 +627,7 @@ void MHZ19::printstream(byte inBytes[MHZ19_DATA_LEN], bool isSent, byte pserrorC
 {
     if (pserrorCode != RESULT_OK && isSent == false)
     {
-        Serial.print("Recieved >> ");
+        Serial.print("Received >> ");
         if (this->storage.settings._isDec)
         {
             Serial.print("DEC: ");
@@ -681,7 +654,7 @@ void MHZ19::printstream(byte inBytes[MHZ19_DATA_LEN], bool isSent, byte pserrorC
 
     else
     {
-        isSent ? Serial.print("Sent << ") : Serial.print("Recieved >> ");
+        isSent ? Serial.print("Sent << ") : Serial.print("Received >> ");
 
         if (this->storage.settings._isDec)
         {
@@ -710,17 +683,17 @@ void MHZ19::printstream(byte inBytes[MHZ19_DATA_LEN], bool isSent, byte pserrorC
 byte MHZ19::getCRC(byte inBytes[])
 {
     /* as shown in datasheet */
-    byte x = 0, CRC = 0;
+    byte x = 0, crc = 0;
 
     for (x = 1; x < 8; x++)
     {
-        CRC += inBytes[x];
+        crc += inBytes[x];
     }
 
-    CRC = 255 - CRC;
-    CRC++;
+    crc = 255 - crc;
+    crc++;
 
-    return CRC;
+    return crc;
 }
 
 void MHZ19::ABCCheck()

@@ -25,6 +25,6 @@ void ClimateSensor::init() {
     sensor.parameter.tempOversampling = 0b101;
     sensor.parameter.pressOversampling = 0b101;
     sensor.init();
-    xTaskCreate(readClimateSensor, "Read Climate Sensor", 1024, &sensor, 1,
+    xTaskCreate(readClimateSensor, "Read Climate Sensor", 2048, &sensor, 1,
                 NULL);
 }
