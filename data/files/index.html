@@ -142,7 +142,7 @@
 
     function reboot() {
         clearResults();
-        fetch('/phantom-controller/restart', {
+        fetch('/controller/restart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -154,7 +154,7 @@
 
     function reset() {
         clearResults();
-        fetch('/phantom-controller/reset', {
+        fetch('/controller/reset', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -174,7 +174,7 @@
         fields.forEach(field => {
             data[field.name] = field.value;
         });
-        fetch('/phantom-controller/config', {
+        fetch('/controller/config', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

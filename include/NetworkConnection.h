@@ -5,6 +5,7 @@ class NetworkConnection {
     static void (*onConnectedCallback)(bool apMode);
     static void startAP(bool hasCredentials = false);
     static void startStation(String ssid, String passsword);
+    static void setupAutomaticReconnect();
 
    public:
     static void init();
